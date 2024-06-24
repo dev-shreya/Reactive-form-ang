@@ -1,19 +1,13 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+
 @Component({
   selector: 'form-comp',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css'],
+  styleUrls: ['./form.component.css'], // Ensure this path is correct
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgFor],
+  imports: [FormsModule, ReactiveFormsModule, NgFor,NgIf],
 })
 export class FormComponent implements OnInit {
   signupForm!: FormGroup;
@@ -28,10 +22,11 @@ export class FormComponent implements OnInit {
         Validators.minLength(6),
       ]),
       gender: new FormControl('male', [Validators.required]),
-      age: new FormControl('Above 18', [Validators.required]),
+      age: new FormControl(this.defaultAgeGroup, [Validators.required]),
     });
   }
+
   onSubmit() {
-    console.log(this.signupForm);
+    console.log(this.signupForm.value);
   }
 }
