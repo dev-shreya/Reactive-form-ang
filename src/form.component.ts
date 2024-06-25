@@ -13,11 +13,12 @@ export class FormComponent implements OnInit {
   signupForm!: FormGroup;
   ageGroup = ['Below 18', 'Above 18'];
   defaultAgeGroup = 'Above 18';
+  forbiddenEmails=['xyz@gmail.com','abc@gmail.com']
 
   ngOnInit() {
     this.signupForm = new FormGroup({
       userData:new FormGroup({
-        email: new FormControl(null, [Validators.required, Validators.email]),
+        email: new FormControl(null, [Validators.required, Validators.email,this.onForbiddenEmails.bind(this)]),
         password: new FormControl(null, [
           Validators.required,
           Validators.minLength(6),
@@ -41,5 +42,14 @@ export class FormComponent implements OnInit {
   onAddHobby(){
     const control= new FormControl(null,Validators.required);
     (<FormArray>this.signupForm.get('hobbies')).push(control)
+  }
+  onForbiddenEmails(control:FormControl):{[s:string]:boolean} | null{
+    if(this.forbiddenEmails.indexOf(control.value) !== -1){
+      return {'emailIsForbidden': true}
+    }
+    else{
+     return null;
+    }
+
   }
 }
