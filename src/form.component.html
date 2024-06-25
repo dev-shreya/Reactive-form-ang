@@ -4,28 +4,32 @@
 
 <div class="container">
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="form-group" style="display: block;">
-        <label>Email:</label>
-        <input type="email" formControlName="email" class="form-control" />
-        <div class="help-block" style="display: block;">
-          <span *ngIf="this.signupForm.get('email')?.touched && this.signupForm.get('email')?.invalid">
-            Please enter a valid email address
-          </span>
+    <div formGroupName="userData">
+      <div class="row">
+        <div class="form-group" style="display: block;">
+          <label>Email:</label>
+          <input type="email" formControlName="email" class="form-control" />
+          <div class="help-block" style="display: block;">
+            <span *ngIf="this.signupForm.get('userData.email')?.touched && this.signupForm.get('userData.email')?.invalid">
+              Please enter a valid email address
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" formControlName="password" class="form-control" />
+          <div class="help-block">
+            <span *ngIf="signupForm.get('userData.password')?.touched && signupForm.get('userData.')?.invalid">
+              Please enter a valid password
+            </span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" formControlName="password" class="form-control" />
-        <div class="help-block">
-          <span *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
-            Please enter a valid password
-          </span>
-        </div>
-      </div>
-    </div>
+
+
     <div class="row">
       <div class="form-group">
         <label for="gender">Gender:</label>

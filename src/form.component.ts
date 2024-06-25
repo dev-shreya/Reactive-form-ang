@@ -16,11 +16,14 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
+      userData:new FormGroup({
+        email: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(6),
+        ])
+      }),
+     
       gender: new FormControl('male', [Validators.required]),
       age: new FormControl(this.defaultAgeGroup, [Validators.required]),
     });
@@ -28,5 +31,6 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.signupForm.value);
+    this.signupForm.reset();
   }
 }
