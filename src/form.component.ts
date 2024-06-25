@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'form-comp',
@@ -26,11 +26,20 @@ export class FormComponent implements OnInit {
      
       gender: new FormControl('male', [Validators.required]),
       age: new FormControl(this.defaultAgeGroup, [Validators.required]),
-    });
+      hobbies:new FormArray([])
+    })
+ 
   }
 
   onSubmit() {
     console.log(this.signupForm.value);
     this.signupForm.reset();
+  }
+  getControls() {
+    return (<FormArray>this.signupForm.get('hobbies')).controls;
+  }
+  onAddHobby(){
+    const control= new FormControl(null,Validators.required);
+    (<FormArray>this.signupForm.get('hobbies')).push(control)
   }
 }

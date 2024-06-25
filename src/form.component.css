@@ -75,3 +75,11 @@ h3 {
   font-weight: 300;
   color: green;
 }
+.hobby{
+  font-size: 15px;
+  color: black;
+  height: 45px;
+  width: max-content;
+  background-color: aqua;
+  margin-bottom: 20px;
+}

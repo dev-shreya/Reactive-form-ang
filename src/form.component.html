@@ -51,6 +51,13 @@
         </div>
       </div>
     </div>
+    <div formArrayName="hobbies">
+      <h3 style="color: black;font-size: 20px;">Hobbies:</h3>
+    <button class="hobby" type="button"   (click)="onAddHobby()"> Add Hobby</button>
+   <div class="form-group"*ngFor="let hobbyControl of getControls(); let i = index">
+    <input type="text" class="form-control" [formControlName]="i">
+   </div>
+    </div>
     <div class="button-container">
       <button [disabled]="!signupForm.valid" class="btn btn-primary">Submit</button>
     </div>
