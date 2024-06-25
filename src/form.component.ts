@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, resolveForwardRef } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'form-comp',
@@ -21,13 +22,14 @@ export class FormComponent implements OnInit {
         email: new FormControl(null, [Validators.required, Validators.email,this.onForbiddenEmails.bind(this)]),
         password: new FormControl(null, [
           Validators.required,
-          Validators.minLength(6),
-        ])
+          Validators.minLength(6)
+        ]
+        )
       }),
      
       gender: new FormControl('male', [Validators.required]),
       age: new FormControl(this.defaultAgeGroup, [Validators.required]),
-      hobbies:new FormArray([])
+      hobbies:new FormArray([]),
     })
  
   }
@@ -52,4 +54,15 @@ export class FormComponent implements OnInit {
     }
 
   }
-}
+  forbiddenPasswords(control: FormControl):Promise<{[key: string]: any} | null> | Observable<{[key: string]: any} | null> |null
+{
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (control.value === 'abc') {
+        resolve({ 'passwordNotPermitted': true });
+      } else {
+        resolve(null);
+      }
+    }, 1500);
+  });
+}}

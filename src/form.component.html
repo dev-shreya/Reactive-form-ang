@@ -26,6 +26,7 @@
           <div class="help-block">
             <span *ngIf="signupForm.get('userData.password')?.touched && signupForm.get('userData.')?.invalid">
               Please enter a valid password
+              <span *ngIf="signupForm.get('userData.password')?.errors?.['passwordNotPermitted']">This password is not allowed</span>
             </span>
           </div>
         </div>
