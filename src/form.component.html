@@ -10,9 +10,12 @@
           <label>Email:</label>
           <input type="email" formControlName="email" class="form-control" />
           <div class="help-block" style="display: block;">
-            <span *ngIf="this.signupForm.get('userData.email')?.touched && this.signupForm.get('userData.email')?.invalid">
+            <span *ngIf="this.signupForm.get('userData.email')?.touched && this.signupForm.get('userData.email')?.invalid && !this.signupForm.get('userData.email')?.errors?.['emailIsForbidden']">
               Please enter a valid email address
+
             </span>
+            <span *ngIf="this.signupForm.get('userData.email')?.errors?.['emailIsForbidden']">This email is not allowed</span>
+            <span *ngIf="this.signupForm.get('userData.email')?.touched && this.signupForm.get('userData.email')?.errors?.['required']">This field is required</span>
           </div>
         </div>
       </div>
