@@ -24,7 +24,7 @@
           <label for="password">Password:</label>
           <input type="password" formControlName="password" class="form-control" />
           <div class="help-block">
-            <span *ngIf="signupForm.get('userData.password')?.touched && signupForm.get('userData.')?.invalid">
+            <span *ngIf="signupForm.get('userData.password')?.touched && signupForm.get('userData.password')?.invalid">
               Please enter a valid password
               <span *ngIf="signupForm.get('userData.password')?.errors?.['passwordNotPermitted']">This password is not allowed</span>
             </span>
